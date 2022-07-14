@@ -8,7 +8,7 @@ import java.util.Set;
 public class TestTask1 {
 
     public static void main(String[] args) {
-        int result = countPairs(List.of(1, 5, 9, 3, 7, 1, 2, 4, 5), 1);
+        int result = countPairs(List.of(1, 5, 9, 3, 7, 1, 2, 4, 5), 2);
         System.out.println("Result = "+result);
     }
 
@@ -66,6 +66,7 @@ public class TestTask1 {
         for (int i=0; i<numbers.size(); i++) {
             for (int j=i; j<numbers.size(); j++) {
                 pairs.add(new Pair(numbers.get(i), numbers.get(j)));
+                pairs.add(new Pair(numbers.get(j), numbers.get(i)));
             }
         }
         int counter = 0;

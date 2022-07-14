@@ -213,7 +213,7 @@ public class TestTask2 {
 
             // More than 1 page!
 
-            List<URI> targets = IntStream.range(1, total_pages)
+            List<URI> targets = IntStream.rangeClosed(1, total_pages)
                     .mapToObj(p -> {
                         try {
                             return new URI(baseUrl + "?author=" + author + "&page=" + p);
@@ -226,7 +226,7 @@ public class TestTask2 {
                     .map(nextUri -> client.sendAsync(getHttpRequest(nextUri), HttpResponse.BodyHandlers.ofString())
                             .thenApply(r -> {
                                 PagedResult nextObject =
-                                        new Gson().fromJson(response.body(), PagedResult.class);
+                                        new Gson().fromJson(r.body(), PagedResult.class);
                                 return getPageResults(nextObject);
                             }))
                     .collect(Collectors.toList());
