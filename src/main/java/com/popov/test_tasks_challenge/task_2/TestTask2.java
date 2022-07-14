@@ -16,6 +16,23 @@ import java.util.stream.IntStream;
 
 import static java.time.temporal.ChronoUnit.SECONDS;
 
+/**
+ * Write an HTTP GET method to retrieve information from an article's database.
+ * The query response is paginated and can be further accessed by appending to the query
+ * string &page=num where num is the page number;
+ *
+ * Given a string of author, getArticleTitles must perform the following tasks:
+ * 1) Query https://jsonmock.hackerrank.com/api/articles?author=name&page=num
+ * 2) Initialize the titles array to store a list of string elements;
+ * 3) Store the name of each article returned in the data field to the
+ * titles array using the following logic:
+ *  - If title is not null, use the title as name;
+ *  - If title is null, and story title is not null, use story_title
+ *  - If both title and story_title are null, ignore the article;
+ *  4) Based on the total_pages count, fetch all the data (pagination)
+ *  and perform step 3 for each
+ *  5) Return the array of titles
+ */
 public class TestTask2 {
 
     static class PagedResult {
@@ -177,7 +194,6 @@ public class TestTask2 {
         }
     }
 
-
     public static void main(String[] args) {
         List<String> result = getArticleTitles("epaga");
         System.out.println("Result = " + result);
@@ -220,7 +236,8 @@ public class TestTask2 {
                         } catch (URISyntaxException e) {
                             throw new RuntimeException(e);
                         }
-                    }).collect(Collectors.toList());
+                    })
+                    .collect(Collectors.toList());
 
             List<CompletableFuture<List<String>>> result = targets.stream()
                     .map(nextUri -> client.sendAsync(getHttpRequest(nextUri), HttpResponse.BodyHandlers.ofString())

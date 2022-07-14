@@ -5,10 +5,32 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+/**
+ * Given an integer k and a list of integers, count the number of distinct
+ * valid pairs of integers (a, b) in the list for which a+k=b. Two pairs of integers(a, b)
+ * and (c, d) are considered distinct if at least one element of (a, b)
+ * does not also belong to (c, d). Note that the elements in a pair might be the same element
+ * in the array. An instance of this is below where k = 0;
+ *
+ * Example #1:
+ * n=4, k = 1
+ * numbers = [1, 1, 1, 2]
+ *
+ * This array has three different valid pairs (1, 1), (1, 2) and (2, 2)
+ * For k=1 there is only 1 valid pair which satisfies a+k=b the pair (1, 2)
+ *
+ * Example #2
+ * n=2, k=0
+ * numbers = [1, 2]
+ *
+ * There are three valid pairs (1, 1), (2, 2) and (1, 2).
+ * For k= 0, two valid pairs satisfy a+k=b: 1+0 = 1, 2+0 = 2
+ *
+ */
 public class TestTask1 {
 
     public static void main(String[] args) {
-        int result = countPairs(List.of(1, 5, 9, 3, 7, 1, 2, 4, 5), 2);
+        int result = countPairs(List.of(1, 2), 0);
         System.out.println("Result = "+result);
     }
 
@@ -69,13 +91,8 @@ public class TestTask1 {
                 pairs.add(new Pair(numbers.get(j), numbers.get(i)));
             }
         }
-        int counter = 0;
-        for (Pair pair : pairs) {
-            if (pair.getB() - pair.getA() == k) {
-                counter ++;
-            }
-        }
-        return counter;
+        long count =
+                pairs.stream().filter(pair -> (pair.getA() + k == pair.getB())).count();
+        return Long.valueOf(count).intValue();
     }
-
 }

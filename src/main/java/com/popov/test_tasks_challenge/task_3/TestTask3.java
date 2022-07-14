@@ -1,10 +1,22 @@
 package com.popov.test_tasks_challenge.task_3;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
+/**
+ * Some numbers are formed with closed paths. The digits 0, 4, 6 and 9 each have
+ * 1 closed path, and 8 has 2.
+ * None of the other numbers is formed with a closed path.
+ * Given a number, determine the total number of closed paths in all of its digits combined.
+ *
+ * Example:
+ * number = 649578
+ * The digits with closed paths are 6, 4, 9, and 9
+ * The total number of closed paths = 1+1+1+2 = 5
+ */
 public class TestTask3 {
 
     private static Map<Integer, Integer> initConditions = new HashMap<>();
@@ -13,27 +25,24 @@ public class TestTask3 {
         initConditions.put(0, 1);
         initConditions.put(4, 1);
         initConditions.put(6, 1);
+        initConditions.put(9, 1);
         initConditions.put(8, 2);
     }
 
     public static void main(String[] args) {
-        int result = closedPaths(369532018);
+        int result = closedPaths(649578);
         System.out.println("Result = "+result);
     }
 
     public static int closedPaths(int number) {
         // Write your code here
         String temp = Integer.toString(number);
-        List<Integer> digits = new ArrayList<>();
-        for (int i = 0; i < temp.length(); i++) {
-            digits.add(Integer.valueOf(temp.substring(i, i+1)));
-        }
-        int count = 0;
-        for (Integer digit : digits) {
-            if (initConditions.get(digit)!=null) {
-                count = count+initConditions.get(digit);
-            }
-        }
+        List<Integer> digits = IntStream.range(0, temp.length()).boxed()
+                .map(i -> Integer.valueOf(temp.substring(i, i + 1))).collect(Collectors.toList());
+
+        Integer count =
+                digits.stream().filter(d -> initConditions.get(d) != null)
+                        .reduce(0, (subtotal, element) -> subtotal + initConditions.get(element));
         return count;
     }
 }
