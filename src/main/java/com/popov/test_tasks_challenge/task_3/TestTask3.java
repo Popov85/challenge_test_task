@@ -19,15 +19,8 @@ import java.util.stream.IntStream;
  */
 public class TestTask3 {
 
-    private static Map<Integer, Integer> initConditions = new HashMap<>();
-
-    static {
-        initConditions.put(0, 1);
-        initConditions.put(4, 1);
-        initConditions.put(6, 1);
-        initConditions.put(9, 1);
-        initConditions.put(8, 2);
-    }
+    private static Map<Integer, Integer> initConditions =
+            Map.of(0, 1, 4, 1, 6, 1, 9, 1, 8, 2);
 
     public static void main(String[] args) {
         int result = closedPaths(649578);

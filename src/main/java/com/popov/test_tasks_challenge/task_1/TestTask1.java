@@ -88,7 +88,6 @@ public class TestTask1 {
         for (int i=0; i<numbers.size(); i++) {
             for (int j=i; j<numbers.size(); j++) {
                 pairs.add(new Pair(numbers.get(i), numbers.get(j)));
-                pairs.add(new Pair(numbers.get(j), numbers.get(i)));
             }
         }
         long count =
