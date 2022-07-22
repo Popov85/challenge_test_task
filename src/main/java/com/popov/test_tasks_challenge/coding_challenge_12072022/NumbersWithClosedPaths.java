@@ -1,6 +1,5 @@
-package com.popov.test_tasks_challenge.task_3;
+package com.popov.test_tasks_challenge.coding_challenge_12072022;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -17,7 +16,7 @@ import java.util.stream.IntStream;
  * The digits with closed paths are 6, 4, 9, and 9
  * The total number of closed paths = 1+1+1+2 = 5
  */
-public class TestTask3 {
+public class NumbersWithClosedPaths {
 
     private static Map<Integer, Integer> initConditions =
             Map.of(0, 1, 4, 1, 6, 1, 9, 1, 8, 2);

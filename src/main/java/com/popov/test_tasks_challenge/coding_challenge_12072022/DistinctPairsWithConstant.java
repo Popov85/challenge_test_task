@@ -1,4 +1,4 @@
-package com.popov.test_tasks_challenge.task_1;
+package com.popov.test_tasks_challenge.coding_challenge_12072022;
 
 import java.util.HashSet;
 import java.util.List;
@@ -27,11 +27,13 @@ import java.util.Set;
  * For k= 0, two valid pairs satisfy a+k=b: 1+0 = 1, 2+0 = 2
  *
  */
-public class TestTask1 {
+public class DistinctPairsWithConstant {
 
     public static void main(String[] args) {
-        int result = countPairs(List.of(1, 2), 0);
+        int result = countPairs(List.of(1, 1, 1, 2), 1);
+        int result2 = getPairsCount(List.of(1, 1, 1, 2), 1);
         System.out.println("Result = "+result);
+        System.out.println("Result2 = "+result2);
     }
 
     /*
@@ -82,6 +84,7 @@ public class TestTask1 {
         }
     }
 
+    // Naive solution
     public static int countPairs(List<Integer> numbers, int k) {
         // Write your code here
         Set<Pair> pairs = new HashSet<>();
@@ -93,5 +96,13 @@ public class TestTask1 {
         long count =
                 pairs.stream().filter(pair -> (pair.getA() + k == pair.getB())).count();
         return Long.valueOf(count).intValue();
+    }
+
+    // Modern solution!
+    public static int getPairsCount(List<Integer> numbers, int k) {
+        Set<Integer> uniqueElements = new HashSet<>(numbers);
+        long res = numbers.stream()
+                .filter(n -> (uniqueElements.contains(n - k))).map(n -> new Pair(n, n - k)).count();
+        return Long.valueOf(res).intValue();
     }
 }

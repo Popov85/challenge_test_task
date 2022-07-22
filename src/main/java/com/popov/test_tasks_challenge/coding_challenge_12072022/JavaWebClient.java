@@ -1,4 +1,4 @@
-package com.popov.test_tasks_challenge.task_2;
+package com.popov.test_tasks_challenge.coding_challenge_12072022;
 
 
 import com.google.gson.Gson;
@@ -33,7 +33,7 @@ import static java.time.temporal.ChronoUnit.SECONDS;
  *  and perform step 3 for each
  *  5) Return the array of titles
  */
-public class TestTask2 {
+public class JavaWebClient {
 
     static class PagedResult {
 
